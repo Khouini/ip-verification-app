@@ -30,7 +30,7 @@ app.post('/post-data', (req, res) => {
   res.send(`POST request received with body: ${JSON.stringify(requestBody)}`);
 });
 
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 8123;
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });
