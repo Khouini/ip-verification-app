@@ -8,9 +8,13 @@ app.use(morgan('dev'));
 const verifyIP = (req, res, next) => {
   const allowedIPs = ['51.38.47.208']; // Replace with your allowed IP addresses
   console.log('🚀 ~ verifyIP ~ allowedIPs:', allowedIPs);
-  const clientIP = req.ip;
+  let clientIP = req.ip;
   console.log('🚀 ~ verifyIP ~ clientIP:', clientIP);
-
+  // Normalize IPv6 format
+  if (clientIP.startsWith('::ffff:')) {
+    clientIP = clientIP.split(':').pop();
+    console.log('🚀 ~ verifyIP ~ clientIP:', clientIP);
+  }
   if (allowedIPs.includes(clientIP)) {
     next();
   } else {
