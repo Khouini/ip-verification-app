@@ -1,13 +1,15 @@
 const express = require('express');
 const app = express();
-
+const morgan = require('morgan');
 // Middleware to parse JSON bodies
 app.use(express.json());
-
+app.use(morgan('dev'));
 // Middleware to verify IP address
 const verifyIP = (req, res, next) => {
   const allowedIPs = ['51.38.47.208']; // Replace with your allowed IP addresses
+  console.log('🚀 ~ verifyIP ~ allowedIPs:', allowedIPs);
   const clientIP = req.ip;
+  console.log('🚀 ~ verifyIP ~ clientIP:', clientIP);
 
   if (allowedIPs.includes(clientIP)) {
     next();
